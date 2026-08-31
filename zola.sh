@@ -5,7 +5,7 @@ set -e
 WORKER_URL="https://private-script-sentosa.cloud07622.workers.dev"
 
 echo "================================"
-echo "        CÀI ĐẶT ZALO PC"
+echo "     CÀI ĐẶT ZALO PC VER 1.8    "
 echo "================================"
 echo
 
