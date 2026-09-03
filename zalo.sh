@@ -142,7 +142,7 @@ unset FIRST_ZALO_PKG
 unset REMOVE_CHOICE
 unset INSTALL_CHOICE
 
-read -rsp "Nhập mật khẩu: " PASSWORD
+read -rsp "Nhập mật khẩu cài đặt: " PASSWORD
 echo
 echo
 
