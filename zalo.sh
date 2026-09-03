@@ -146,7 +146,7 @@ read -rsp "Nhập mật khẩu: " PASSWORD
 echo
 echo
 
-# Gửi password đến Cloudflare Worker
+# Gửi password xác thực
 printf '%s' "$PASSWORD" | python3 -c '
 import sys
 import json
