@@ -89,7 +89,7 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
 
                 echo
                 echo "================================"
-                echo "       ĐÃ GỠ ZALO THÀNH CÔNG"
+                echo "       ĐÃ GỠ ZALO THÀNH CÔNG    "
                 echo "================================"
                 echo
                 break
@@ -109,6 +109,8 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
     echo
     echo "Máy bạn đã gỡ Zalo thành công."
     echo "Bạn có muốn cài phiên bản mới không?"
+    echo
+    echo "Nếu cài phiên bản mới, cần nhập thêm mật khẩu cài đặt, chọn 1 nếu cài tiếp bản mới"
     echo
     echo "  1. Tiếp tục cài bản mới"
     echo "  2. Thoát và không cài gì tiếp"
