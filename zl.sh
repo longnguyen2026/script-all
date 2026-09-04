@@ -39,12 +39,14 @@ fi
 
 if [ "$ZALO_INSTALLED" -eq 1 ]; then
     echo "================================"
-    echo "       ZALO ĐÃ ĐƯỢC CÀI ĐẶT"
+    echo "       ZALO ĐÃ ĐƯỢC CÀI ĐẶT     "
     echo "================================"
     echo
     echo "Máy bạn đang có Zalo phiên bản: $ZALO_VERSION"
     echo
     echo "Bạn có muốn gỡ cài đặt Zalo cũ không?"
+    echo
+    echo "Nếu muốn gỡ bản cũ, bạn cần chọn Thoát Zalo trên khay đồng hồ trước và chọn 1"
     echo
     echo "  1. Gỡ Zalo cũ và tiếp tục hỏi cài bản mới"
     echo "  2. Hủy lệnh"
@@ -87,7 +89,7 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
 
                 echo
                 echo "================================"
-                echo "       ĐÃ GỠ ZALO THÀNH CÔNG"
+                echo "       ĐÃ GỠ ZALO THÀNH CÔNG    "
                 echo "================================"
                 echo
                 break
@@ -107,6 +109,8 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
     echo
     echo "Máy bạn đã gỡ Zalo thành công."
     echo "Bạn có muốn cài phiên bản mới không?"
+    echo
+    echo "Nếu cài phiên bản mới, cần nhập thêm mật khẩu cài đặt, chọn 1 nếu cài tiếp bản mới"
     echo
     echo "  1. Tiếp tục cài bản mới"
     echo "  2. Thoát và không cài gì tiếp"
