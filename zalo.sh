@@ -39,7 +39,7 @@ fi
 
 if [ "$ZALO_INSTALLED" -eq 1 ]; then
     echo "================================"
-    echo "       ZALO ĐÃ ĐƯỢC CÀI ĐẶT"
+    echo "       ZALO ĐÃ ĐƯỢC CÀI ĐẶT     "
     echo "================================"
     echo
     echo "Máy bạn đang có Zalo phiên bản: $ZALO_VERSION"
