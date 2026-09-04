@@ -46,6 +46,8 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
     echo
     echo "Bạn có muốn gỡ cài đặt Zalo cũ không?"
     echo
+    echo "Nếu muốn gỡ bản cũ, bạn cần chọn Thoát Zalo trên khay đồng hồ trước và chọn 1"
+    echo
     echo "  1. Gỡ Zalo cũ và tiếp tục hỏi cài bản mới"
     echo "  2. Hủy lệnh"
     echo
