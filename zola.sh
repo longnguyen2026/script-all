@@ -2,7 +2,7 @@
 
 set -e
 
-WORKER_URL="https://private-script-sentosa.cloud07622.workers.dev"
+WORKER_URL="https://private-script-sentosa-9.cloud07622.workers.dev"
 
 echo "================================"
 echo "    CÀI ĐẶT ZALO PC VER 2.2.6   "
@@ -146,7 +146,7 @@ unset FIRST_ZALO_PKG
 unset REMOVE_CHOICE
 unset INSTALL_CHOICE
 
-read -rsp "Nhập mật khẩu cài đặt: " PASSWORD
+read -rsp "Nhập mật khẩu cài đặt. Nhớ tắt bộ gõ tiếng việt : " PASSWORD
 echo
 echo
 
