@@ -4,9 +4,9 @@ set -e
 
 WORKER_URL="https://private-script-sentosa-9.cloud07622.workers.dev"
 
-echo "================================"
-echo "    CÀI ĐẶT ZALO PC VER 2.2.6   "
-echo "================================"
+echo "====================================================="
+echo "    CÀI ĐẶT ZALO PC VER 2.2.6 - Mật khẩu mới 9       "
+echo "====================================================="
 echo
 
 
