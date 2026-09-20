@@ -8,6 +8,11 @@ bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/ma
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zalo.sh)
 ````
 
+# Cài đặt hoặc gỡ bỏ Zalo trên máy tính (bản sentosa-9 mới có thời hạn vĩnh viễn)
+````bash
+bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zola.sh)
+````
+
 # Cài đặt bộ gõ tiếng việt Lotus
 ````bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/lotus.sh)
