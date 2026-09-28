@@ -17,3 +17,8 @@ bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/ma
 ````bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/lotus.sh)
 ````
+
+# Share máy in đang kết nối cổng USB
+````bash
+bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/share-usb-printer.sh)
+````
