@@ -25,3 +25,8 @@ bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/ma
 ````bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/unshare-printer.sh)
 ````
+
+# Chỉnh độ phân giải màn hình
+````bash
+bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/vga.sh)
+````
