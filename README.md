@@ -4,7 +4,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/ma
 ````
 
 
-### Cài đặt hoặc gỡ bỏ Zalo trên máy tính
+## Cài đặt hoặc gỡ bỏ Zalo trên máy tính
 ### Cài đặt hoặc gỡ bỏ Zalo trên máy tính (thông báo nếu sai mật khẩu)
 ````bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zalo.sh)
