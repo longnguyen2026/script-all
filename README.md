@@ -1,6 +1,6 @@
 # Lệnh hiển thị menu cài tổng hợp
 ````bash
-bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zalo.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/menu.sh)
 ````
 
 
