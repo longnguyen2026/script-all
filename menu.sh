@@ -35,7 +35,7 @@ while true; do
             echo "----------------------------------"
             
             # Thực thi và ghi toàn bộ output (stdout & stderr) ra màn hình và file log
-            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/gotiengviet/main/vdkey-install.sh) 2>&1 | tee "$LOG_FILE"
+            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/gotiengviet/main/vdkey.sh) 2>&1 | tee "$LOG_FILE"
             ;;
         2)
             LOG_FILE="$LOG_DIR/zalo_$TIMESTAMP.log"
@@ -93,7 +93,7 @@ while true; do
                 echo "=== BẮT ĐẦU CÀI ĐẶT TOÀN BỘ ($(date)) ==="
                 
                 echo "--- [1/6] VDKey ---"
-                bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/gotiengviet/main/vdkey-install.sh)
+                bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/gotiengviet/main/vdkey.sh)
                 
                 echo "--- [2/6] Zalo ---"
                 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zola.sh)
