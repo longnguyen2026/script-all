@@ -34,7 +34,6 @@ while true; do
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
-            # Thực thi và ghi toàn bộ output (stdout & stderr) ra màn hình và file log
             bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/gotiengviet/main/vdkey.sh) 2>&1 | tee "$LOG_FILE"
             ;;
         2)
@@ -53,6 +52,8 @@ while true; do
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
+            # Xác thực sudo trước để tránh xung đột stdin với tee
+            sudo -v
             curl -fsSL https://raw.githubusercontent.com/longnguyen2026/printer/main/in.sh | sudo bash 2>&1 | tee "$LOG_FILE"
             ;;
         4)
@@ -71,7 +72,12 @@ while true; do
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
-            curl -sSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh | sudo bash 2>&1 | tee "$LOG_FILE"
+            # Tải về file tạm và cấp sudo sạch sẽ, không bị vướng stdin
+            sudo -v
+            TMP_SCRIPT="/tmp/libreoffice_install.sh"
+            curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh -o "$TMP_SCRIPT"
+            sudo bash "$TMP_SCRIPT" 2>&1 | tee "$LOG_FILE"
+            rm -f "$TMP_SCRIPT"
             ;;
         6)
             LOG_FILE="$LOG_DIR/fviewer_$TIMESTAMP.log"
@@ -89,6 +95,11 @@ while true; do
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
+            # Giữ session sudo hoạt động liên tục trong suốt tiến trình cài đặt
+            sudo -v
+            ( while true; do sudo -v; sleep 60; kill -0 "$$" || exit; done 2>/dev/null ) &
+            SUDO_KEEP_ALIVE_PID=$!
+
             {
                 echo "=== BẮT ĐẦU CÀI ĐẶT TOÀN BỘ ($(date)) ==="
                 
@@ -105,13 +116,19 @@ while true; do
                 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/winboat/main/install-wb-v4.sh)
                 
                 echo "--- [5/6] LibreOffice ---"
-                curl -sSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh | sudo bash
+                TMP_SCRIPT="/tmp/libreoffice_install.sh"
+                curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh -o "$TMP_SCRIPT"
+                sudo bash "$TMP_SCRIPT"
+                rm -f "$TMP_SCRIPT"
                 
                 echo "--- [6/6] FViewer ---"
                 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/fviewer/main/fviewer.sh)
                 
                 echo "=== HOÀN TẤT TOÀN BỘ QUÁ TRÌNH ($(date)) ==="
             } 2>&1 | tee "$LOG_FILE"
+            
+            # Hủy tiến trình giữ sudo sau khi hoàn thành
+            kill "$SUDO_KEEP_ALIVE_PID" 2>/dev/null || true
             
             echo "Đã hoàn tất toàn bộ tiến trình cài đặt!"
             ;;
