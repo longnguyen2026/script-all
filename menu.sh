@@ -16,11 +16,12 @@ while true; do
     echo "  3) Cài đặt và cấu hình máy in (USB/LAN)"
     echo "  4) Cài đặt Winboat"
     echo "  5) Cài mới LibreOffice"
-    echo "  6) Cài đặt tất cả (Chạy tuần tự 1 -> 5)"
-    echo "  7) Thoát"
+    echo "  6) Cài đặt FViewer"
+    echo "  7) Cài đặt tất cả (Chạy tuần tự 1 -> 6)"
+    echo "  8) Thoát"
     echo ""
     
-    read -p "Nhập lựa chọn của bạn [1-7]: " choice
+    read -p "Nhập lựa chọn của bạn [1-8]: " choice
 
     # Tạo tên file log dựa theo thời gian thực để tránh ghi đè
     TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
@@ -73,6 +74,15 @@ while true; do
             curl -sSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh | bash 2>&1 | tee "$LOG_FILE"
             ;;
         6)
+            LOG_FILE="$LOG_DIR/fviewer_$TIMESTAMP.log"
+            echo "----------------------------------"
+            echo "Đang cài đặt FViewer..."
+            echo "Log chi tiết được lưu tại: $LOG_FILE"
+            echo "----------------------------------"
+            
+            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/fviewer/main/fviewer.sh) 2>&1 | tee "$LOG_FILE"
+            ;;
+        7)
             LOG_FILE="$LOG_DIR/install_all_$TIMESTAMP.log"
             echo "----------------------------------"
             echo "Tiến hành cài đặt toàn bộ gói hệ thống..."
@@ -82,32 +92,35 @@ while true; do
             {
                 echo "=== BẮT ĐẦU CÀI ĐẶT TOÀN BỘ ($(date)) ==="
                 
-                echo "--- [1/5] VDKey ---"
+                echo "--- [1/6] VDKey ---"
                 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/gotiengviet/main/vdkey-install.sh)
                 
-                echo "--- [2/5] Zalo ---"
+                echo "--- [2/6] Zalo ---"
                 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zola.sh)
                 
-                echo "--- [3/5] Printer ---"
+                echo "--- [3/6] Printer ---"
                 curl -fsSL https://raw.githubusercontent.com/longnguyen2026/printer/main/in.sh | sudo bash
                 
-                echo "--- [4/5] Winboat ---"
+                echo "--- [4/6] Winboat ---"
                 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/winboat/main/install-wb-v4.sh)
                 
-                echo "--- [5/5] LibreOffice ---"
+                echo "--- [5/6] LibreOffice ---"
                 curl -sSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh | bash
+                
+                echo "--- [6/6] FViewer ---"
+                bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/fviewer/main/fviewer.sh)
                 
                 echo "=== HOÀN TẤT TOÀN BỘ QUÁ TRÌNH ($(date)) ==="
             } 2>&1 | tee "$LOG_FILE"
             
             echo "Đã hoàn tất toàn bộ tiến trình cài đặt!"
             ;;
-        7)
+        8)
             echo "Thoát chương trình. Hẹn gặp lại!"
             exit 0
             ;;
         *)
-            echo "Lựa chọn không hợp lệ! Vui lòng chọn từ 1 đến 7."
+            echo "Lựa chọn không hợp lệ! Vui lòng chọn từ 1 đến 8."
             ;;
     esac
     
