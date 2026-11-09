@@ -95,7 +95,7 @@ while true; do
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
-            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/drive-gg/main/drive.sh) 2>&1 | tee "$LOG_FILE"
+            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/drive-gg/main/install.sh) 2>&1 | tee "$LOG_FILE"
             ;;
         8)
             echo "Thoát chương trình. Hẹn gặp lại!"
