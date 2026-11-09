@@ -71,7 +71,7 @@ while true; do
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
-            curl -sSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh | bash 2>&1 | tee "$LOG_FILE"
+            curl -sSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh | sudo bash 2>&1 | tee "$LOG_FILE"
             ;;
         6)
             LOG_FILE="$LOG_DIR/fviewer_$TIMESTAMP.log"
@@ -105,7 +105,7 @@ while true; do
                 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/winboat/main/install-wb-v4.sh)
                 
                 echo "--- [5/6] LibreOffice ---"
-                curl -sSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh | bash
+                curl -sSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh | sudo bash
                 
                 echo "--- [6/6] FViewer ---"
                 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/fviewer/main/fviewer.sh)
