@@ -12,15 +12,15 @@ while true; do
     echo "Vui lòng chọn công cụ hoặc phần mềm cần cài đặt:"
     echo ""
     echo "  1) Cài đặt bộ gõ tiếng Việt VDKey"
-    echo "  2) Cài đặt hoặc gỡ bỏ Zalo Linux (sentosa-9)"
+    echo "  2) Cài đặt hoặc gỡ bỏ Zalo Linux (chuẩn)"
     echo "  3) Cài đặt và cấu hình máy in (USB/LAN)"
     echo "  4) Cài đặt Winboat"
     echo "  5) Cài mới LibreOffice"
-    echo "  6) Cài đặt FViewer"
-    echo "  7) Cài đặt tất cả (Chạy tuần tự 1 -> 6)"
+    echo "  6) Cài đặt FViewer (chỉ dành cho máy IT cài linux)"
+    echo "  7) Cài đặt Google Drive"
     echo "  8) Thoát"
     echo ""
-    
+
     read -p "Nhập lựa chọn của bạn [1-8]: " choice
 
     # Tạo tên file log dựa theo thời gian thực để tránh ghi đè
@@ -33,16 +33,16 @@ while true; do
             echo "Đang cài đặt bộ gõ tiếng Việt VDKey..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
-            
+
             bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/gotiengviet/main/vdkey.sh) 2>&1 | tee "$LOG_FILE"
             ;;
         2)
             LOG_FILE="$LOG_DIR/zalo_$TIMESTAMP.log"
             echo "----------------------------------"
-            echo "Đang cài đặt/gỡ bỏ Zalo (sentosa-9)..."
+            echo "Đang cài đặt/gỡ bỏ Zalo (chuẩn)..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
-            
+
             bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zola.sh) 2>&1 | tee "$LOG_FILE"
             ;;
         3)
@@ -51,7 +51,7 @@ while true; do
             echo "Đang cấu hình và cài đặt máy in..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
-            
+
             # Xác thực sudo trước để tránh xung đột stdin với tee
             sudo -v
             curl -fsSL https://raw.githubusercontent.com/longnguyen2026/printer/main/in.sh | sudo bash 2>&1 | tee "$LOG_FILE"
@@ -62,7 +62,7 @@ while true; do
             echo "Đang cài đặt Winboat..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
-            
+
             bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/winboat/main/install-wb-v4.sh) 2>&1 | tee "$LOG_FILE"
             ;;
         5)
@@ -71,7 +71,7 @@ while true; do
             echo "Đang cài mới LibreOffice..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
-            
+
             # Tải về file tạm và cấp sudo sạch sẽ, không bị vướng stdin
             sudo -v
             TMP_SCRIPT="/tmp/libreoffice_install.sh"
@@ -85,52 +85,17 @@ while true; do
             echo "Đang cài đặt FViewer..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
-            
+
             bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/fviewer/main/fviewer.sh) 2>&1 | tee "$LOG_FILE"
             ;;
         7)
-            LOG_FILE="$LOG_DIR/install_all_$TIMESTAMP.log"
+            LOG_FILE="$LOG_DIR/drive_$TIMESTAMP.log"
             echo "----------------------------------"
-            echo "Tiến hành cài đặt toàn bộ gói hệ thống..."
+            echo "Đang cài đặt Google Drive..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
-            
-            # Giữ session sudo hoạt động liên tục trong suốt tiến trình cài đặt
-            sudo -v
-            ( while true; do sudo -v; sleep 60; kill -0 "$$" || exit; done 2>/dev/null ) &
-            SUDO_KEEP_ALIVE_PID=$!
 
-            {
-                echo "=== BẮT ĐẦU CÀI ĐẶT TOÀN BỘ ($(date)) ==="
-                
-                echo "--- [1/6] VDKey ---"
-                bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/gotiengviet/main/vdkey.sh)
-                
-                echo "--- [2/6] Zalo ---"
-                bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zola.sh)
-                
-                echo "--- [3/6] Printer ---"
-                curl -fsSL https://raw.githubusercontent.com/longnguyen2026/printer/main/in.sh | sudo bash
-                
-                echo "--- [4/6] Winboat ---"
-                bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/winboat/main/install-wb-v4.sh)
-                
-                echo "--- [5/6] LibreOffice ---"
-                TMP_SCRIPT="/tmp/libreoffice_install.sh"
-                curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh -o "$TMP_SCRIPT"
-                sudo bash "$TMP_SCRIPT"
-                rm -f "$TMP_SCRIPT"
-                
-                echo "--- [6/6] FViewer ---"
-                bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/fviewer/main/fviewer.sh)
-                
-                echo "=== HOÀN TẤT TOÀN BỘ QUÁ TRÌNH ($(date)) ==="
-            } 2>&1 | tee "$LOG_FILE"
-            
-            # Hủy tiến trình giữ sudo sau khi hoàn thành
-            kill "$SUDO_KEEP_ALIVE_PID" 2>/dev/null || true
-            
-            echo "Đã hoàn tất toàn bộ tiến trình cài đặt!"
+            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/drive-gg/main/install.sh) 2>&1 | tee "$LOG_FILE"
             ;;
         8)
             echo "Thoát chương trình. Hẹn gặp lại!"
@@ -140,7 +105,7 @@ while true; do
             echo "Lựa chọn không hợp lệ! Vui lòng chọn từ 1 đến 8."
             ;;
     esac
-    
+
     echo ""
     echo "💡 Các file log thực thi được lưu tại thư mục: ./logs/"
     read -p "Nhấn [Enter] để quay lại menu chính..."
