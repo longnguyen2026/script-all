@@ -12,16 +12,18 @@ while true; do
     echo "Vui lòng chọn công cụ hoặc phần mềm cần cài đặt:"
     echo ""
     echo "  1) Cài đặt bộ gõ tiếng Việt VDKey"
-    echo "  2) Cài đặt hoặc gỡ bỏ Zalo Linux (chuẩn)"
+    echo "  2) Cài đặt hoặc gỡ bỏ Zalo Linux (sentosa-9)"
     echo "  3) Cài đặt và cấu hình máy in (USB/LAN)"
     echo "  4) Cài đặt Winboat"
     echo "  5) Cài mới LibreOffice"
-    echo "  6) Cài đặt FViewer (chỉ dành cho máy IT cài linux)"
+    echo "  6) Cài đặt FViewer"
     echo "  7) Cài đặt Google Drive"
-    echo "  8) Thoát"
+    echo "  8) Cài đặt WPS Office mới"
+    echo "  9) Sửa lỗi mất định dạng Office khi tải lên Google Drive"
+    echo "  10) Thoát"
     echo ""
     
-    read -p "Nhập lựa chọn của bạn [1-8]: " choice
+    read -p "Nhập lựa chọn của bạn [1-10]: " choice
 
     # Tạo tên file log dựa theo thời gian thực để tránh ghi đè
     TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
@@ -39,7 +41,7 @@ while true; do
         2)
             LOG_FILE="$LOG_DIR/zalo_$TIMESTAMP.log"
             echo "----------------------------------"
-            echo "Đang cài đặt/gỡ bỏ Zalo (chuẩn)..."
+            echo "Đang cài đặt/gỡ bỏ Zalo (sentosa-9)..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
@@ -98,11 +100,30 @@ while true; do
             bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/drive-gg/main/install.sh) 2>&1 | tee "$LOG_FILE"
             ;;
         8)
+            LOG_FILE="$LOG_DIR/wps_$TIMESTAMP.log"
+            echo "----------------------------------"
+            echo "Đang cài đặt WPS Office mới..."
+            echo "Log chi tiết được lưu tại: $LOG_FILE"
+            echo "----------------------------------"
+            
+            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/wps.sh) 2>&1 | tee "$LOG_FILE"
+            ;;
+        9)
+            LOG_FILE="$LOG_DIR/fix_upload_drive_$TIMESTAMP.log"
+            echo "----------------------------------"
+            echo "Đang sửa lỗi định dạng tệp tải lên Google Drive..."
+            echo "Log chi tiết được lưu tại: $LOG_FILE"
+            echo "----------------------------------"
+            
+            sudo -v
+            curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/fix-upload-drive.sh | sudo bash 2>&1 | tee "$LOG_FILE"
+            ;;
+        10)
             echo "Thoát chương trình. Hẹn gặp lại!"
             exit 0
             ;;
         *)
-            echo "Lựa chọn không hợp lệ! Vui lòng chọn từ 1 đến 8."
+            echo "Lựa chọn không hợp lệ! Vui lòng chọn từ 1 đến 10."
             ;;
     esac
     
