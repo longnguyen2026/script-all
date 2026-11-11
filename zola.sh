@@ -5,7 +5,7 @@ set -e
 WORKER_URL="https://private-script-sentosa-9.cloud07622.workers.dev"
 
 echo "============================================================="
-echo "    CÀI ĐẶT ZALO PC VER 2.2.6 - Mật khẩu mới sentosa-9       "
+echo "    CÀI ĐẶT ZALO PC VER 26.11.10 - Mật khẩu mới sentosa-9    "
 echo "============================================================="
 echo
 
@@ -66,7 +66,7 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
                 pkill -f '/opt/zalo' 2>/dev/null || true
                 pkill -f 'zalo-linux' 2>/dev/null || true
 
-                # Gỡ đúng các package Zalo đã tìm thấy
+                # Gỡ đúng các package Zalo đã 6tìm thấy
                 if [ -n "$ZALO_PKGS" ]; then
                     sudo apt purge -y $ZALO_PKGS
                 fi
