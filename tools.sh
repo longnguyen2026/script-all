@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Tạo thư mục chứa file log nếu chưa có
-LOG_DIR="./logs"
+# Lưu log vào thư mục của user hiện tại để tránh lỗi Permission denied khi đứng ở thư mục khác
+LOG_DIR="$HOME/logs"
 mkdir -p "$LOG_DIR"
 
 while true; do
     clear
     echo "=================================================="
-    echo "    QUẢN LÝ CÀI ĐẶT HỆ THỐNG KUBUNTU (LONG)       "
+    echo "    QUẢN LÝ CÀI ĐẶT HỆ THỐNG KUBUNTU (LONG)        "
     echo "=================================================="
     echo "Vui lòng chọn công cụ hoặc phần mềm cần cài đặt:"
     echo ""
@@ -41,7 +41,7 @@ while true; do
         2)
             LOG_FILE="$LOG_DIR/zalo_$TIMESTAMP.log"
             echo "----------------------------------"
-            echo "Đang cài đặt/gỡ bỏ Zalo (Ver 26.11.10)..."
+            echo "Đang cài đặt/gỡ bỏ Zalo Linux..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
@@ -54,7 +54,6 @@ while true; do
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
-            # Xác thực sudo trước để tránh xung đột stdin với tee
             sudo -v
             curl -fsSL https://raw.githubusercontent.com/longnguyen2026/printer/main/in.sh | sudo bash 2>&1 | tee "$LOG_FILE"
             ;;
@@ -74,7 +73,6 @@ while true; do
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
-            # Tải về file tạm và cấp sudo sạch sẽ, không bị vướng stdin
             sudo -v
             TMP_SCRIPT="/tmp/libreoffice_install.sh"
             curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh -o "$TMP_SCRIPT"
@@ -106,7 +104,8 @@ while true; do
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
-            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/wps.sh) 2>&1 | tee "$LOG_FILE"
+            sudo -v
+            curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/wps.sh | sudo bash 2>&1 | tee "$LOG_FILE"
             ;;
         9)
             LOG_FILE="$LOG_DIR/fix_upload_drive_$TIMESTAMP.log"
@@ -128,6 +127,6 @@ while true; do
     esac
     
     echo ""
-    echo "💡 Các file log thực thi được lưu tại thư mục: ./logs/"
+    echo "💡 Các file log thực thi được lưu tại thư mục: $LOG_DIR/"
     read -p "Nhấn [Enter] để quay lại menu chính..."
 done
