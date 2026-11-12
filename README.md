@@ -8,15 +8,9 @@ bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/ma
 ````
 
 
-## Cài đặt hoặc gỡ bỏ Zalo trên máy tính
-### Cài đặt hoặc gỡ bỏ Zalo trên máy tính (bản sentosa-9 mới có thời hạn vĩnh viễn)
+# Cài đặt hoặc gỡ bỏ Zalo trên máy tính
 ````bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zola.sh)
-````
-
-# Cài đặt bộ gõ tiếng việt Lotus
-````bash
-bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/lotus.sh)
 ````
 
 # Share và Unshare máy in đang kết nối cổng USB
