@@ -7,7 +7,7 @@ mkdir -p "$LOG_DIR"
 while true; do
     clear
     echo "=================================================="
-    echo "    QUẢN LÝ CÀI ĐẶT HỆ THỐNG KUBUNTU (LONG)        "
+    echo "    QUẢN LÝ CÀI ĐẶT HỆ THỐNG KUBUNTU (LONG)       "
     echo "=================================================="
     echo "Vui lòng chọn công cụ hoặc phần mềm cần cài đặt:"
     echo ""
