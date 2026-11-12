@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Lưu log vào thư mục của user hiện tại để tránh lỗi Permission denied khi đứng ở thư mục khác
-LOG_DIR="$HOME/logs"
+# Lưu log vào /tmp để tránh lỗi Permission denied dù chạy ở thư mục nào hay dưới quyền root/user
+LOG_DIR="/tmp/kubuntu-install-logs"
 mkdir -p "$LOG_DIR"
+chmod 777 "$LOG_DIR" 2>/dev/null || true
 
 while true; do
     clear
