@@ -2,13 +2,13 @@
 ````bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/menu.sh)
 ````
+Hoặc
+````bash
+bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/tools.sh)
+````
 
 
 ## Cài đặt hoặc gỡ bỏ Zalo trên máy tính
-### Cài đặt hoặc gỡ bỏ Zalo trên máy tính (thông báo nếu sai mật khẩu)
-````bash
-bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zalo.sh)
-````
 ### Cài đặt hoặc gỡ bỏ Zalo trên máy tính (bản sentosa-9 mới có thời hạn vĩnh viễn)
 ````bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zola.sh)
