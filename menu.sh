@@ -12,10 +12,10 @@ while true; do
     echo "Vui lòng chọn công cụ hoặc phần mềm cần cài đặt:"
     echo ""
     echo "  1) Cài đặt bộ gõ tiếng Việt VDKey"
-    echo "  2) Cài đặt hoặc gỡ bỏ Zalo Linux (sentosa-9)"
+    echo "  2) Cài đặt hoặc gỡ bỏ Zalo Linux (Ver 26.11.10)"
     echo "  3) Cài đặt và cấu hình máy in (USB/LAN)"
     echo "  4) Cài đặt Winboat"
-    echo "  5) Cài mới LibreOffice"
+    echo "  5) Cài đặt LibreOffice mới"
     echo "  6) Cài đặt FViewer"
     echo "  7) Cài đặt Google Drive"
     echo "  8) Cài đặt WPS Office mới"
@@ -41,7 +41,7 @@ while true; do
         2)
             LOG_FILE="$LOG_DIR/zalo_$TIMESTAMP.log"
             echo "----------------------------------"
-            echo "Đang cài đặt/gỡ bỏ Zalo (sentosa-9)..."
+            echo "Đang cài đặt/gỡ bỏ Zalo (Ver 26.11.10)..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
@@ -70,7 +70,7 @@ while true; do
         5)
             LOG_FILE="$LOG_DIR/libreoffice_$TIMESTAMP.log"
             echo "----------------------------------"
-            echo "Đang cài mới LibreOffice..."
+            echo "Đang cài đặt LibreOffice mới..."
             echo "Log chi tiết được lưu tại: $LOG_FILE"
             echo "----------------------------------"
             
