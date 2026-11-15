@@ -10,11 +10,11 @@ echo "============================================================="
 echo
 
 # ============================================================
-# KIỂM TRA ZALO ĐÃ CÀI TRƯỚC KHI CÀI BẢN MỚI
+# KIỂM TRA ZALO / FZALO ĐÃ CÀI TRƯỚC KHI CÀI BẢN MỚI
 # ============================================================
 
 ZALO_PKGS=$(dpkg-query -W -f='${binary:Package}\n' 2>/dev/null \
-    | grep -Ei '^zalo(-linux-builder|-linux-darling|-linux|-mac)?(:|$)' \
+    | grep -Ei '^(zalo|fzalo|zalux)(-linux-builder|-linux-darling|-linux|-mac)?(:|$)' \
     || true)
 
 ZALO_INSTALLED=0
@@ -23,14 +23,15 @@ ZALO_VERSION=""
 if [ -n "$ZALO_PKGS" ]; then
     ZALO_INSTALLED=1
 
-    # Lấy phiên bản của package Zalo đầu tiên tìm được.
+    # Lấy phiên bản của package Zalo/Fzalo đầu tiên tìm được.
     FIRST_ZALO_PKG=$(printf '%s\n' "$ZALO_PKGS" | head -n 1)
     ZALO_VERSION=$(dpkg-query -W -f='${Version}' "$FIRST_ZALO_PKG" 2>/dev/null || true)
 fi
 
 # Trường hợp package không còn trong dpkg nhưng thư mục cài đặt vẫn tồn tại.
 if [ "$ZALO_INSTALLED" -eq 0 ] && {
-    [ -d "/opt/Zalo" ] || [ -d "/opt/zalo" ] || [ -d "/opt/zalo-linux" ];
+    [ -d "/opt/Zalo" ] || [ -d "/opt/zalo" ] || [ -d "/opt/zalo-linux" ] || \
+    [ -d "/opt/fzalo" ] || [ -d "/opt/zalux" ] || [ -d "$HOME/.local/opt/zalux" ] || [ -d "$HOME/.local/opt/fzalo" ];
 }; then
     ZALO_INSTALLED=1
     ZALO_VERSION="không xác định"
@@ -38,16 +39,16 @@ fi
 
 if [ "$ZALO_INSTALLED" -eq 1 ]; then
     echo "================================"
-    echo "       ZALO ĐÃ ĐƯỢC CÀI ĐẶT     "
+    echo "   ZALO / FZALO ĐÃ ĐƯỢC CÀI ĐẶT "
     echo "================================"
     echo
-    echo "Máy bạn đang có Zalo phiên bản: $ZALO_VERSION"
+    echo "Máy bạn đang có phiên bản: $ZALO_VERSION"
     echo
-    echo "Bạn có muốn gỡ cài đặt Zalo cũ không?"
+    echo "Bạn có muốn gỡ cài đặt Zalo/Fzalo cũ không?"
     echo
-    echo "Nếu muốn gỡ bản cũ, bạn cần chọn Thoát Zalo trên khay đồng hồ trước và chọn 1"
+    echo "Nếu muốn gỡ bản cũ, bạn cần chọn Thoát ứng dụng trên khay đồng hồ trước và chọn 1"
     echo
-    echo "  1. Gỡ Zalo cũ và tiếp tục hỏi cài bản mới"
+    echo "  1. Gỡ bản cũ và tiếp tục hỏi cài bản mới"
     echo "  2. Hủy lệnh"
     echo
 
@@ -57,45 +58,60 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
         case "$REMOVE_CHOICE" in
             1)
                 echo
-                echo "Đang gỡ Zalo cũ..."
+                echo "Đang gỡ Zalo / Fzalo cũ..."
                 echo
 
-                # Dừng Zalo đang chạy
+                # Dừng các tiến trình đang chạy
                 pkill -f '/opt/Zalo' 2>/dev/null || true
                 pkill -f '/opt/zalo' 2>/dev/null || true
                 pkill -f 'zalo-linux' 2>/dev/null || true
+                pkill -f 'fzalo' 2>/dev/null || true
+                pkill -f 'zalux' 2>/dev/null || true
+                pkill -f '\.local/opt/zalux' 2>/dev/null || true
+                pkill -f '\.local/opt/fzalo' 2>/dev/null || true
 
-                # Gỡ đúng các package Zalo đã tìm thấy
+                # Gỡ đúng các package đã tìm thấy
                 if [ -n "$ZALO_PKGS" ]; then
                     sudo apt purge -y $ZALO_PKGS
                 fi
 
-                # Xóa thư mục cài đặt hệ thống Zalo
+                # Xóa thư mục cài đặt hệ thống
                 sudo rm -rf /opt/Zalo
                 sudo rm -rf /opt/zalo
                 sudo rm -rf /opt/zalo-linux
+                sudo rm -rf /opt/fzalo
+                sudo rm -rf /opt/zalux
 
-                # Xóa launcher Zalo cũ
+                # Xóa thư mục cài đặt user-local (Fzalo/Zalux)
+                rm -rf "$HOME/.local/opt/zalux"
+                rm -rf "$HOME/.local/opt/fzalo"
+
+                # Xóa launcher cá nhân
                 rm -f "$HOME/.local/share/applications/zalo.desktop"
                 rm -f "$HOME/.local/share/applications/zalo-linux.desktop"
                 rm -f "$HOME/.local/share/applications/Zalo.desktop"
                 rm -f "$HOME/.local/share/applications/ZaloMac.desktop"
+                rm -f "$HOME/.local/share/applications/fzalo.desktop"
+                rm -f "$HOME/.local/share/applications/zalux.desktop"
 
+                # Xóa launcher hệ thống
                 sudo rm -f /usr/share/applications/zalo.desktop
                 sudo rm -f /usr/share/applications/zalo-linux.desktop
                 sudo rm -f /usr/share/applications/Zalo.desktop
                 sudo rm -f /usr/share/applications/ZaloMac.desktop
+                sudo rm -f /usr/share/applications/fzalo.desktop
+                sudo rm -f /usr/share/applications/zalux.desktop
 
                 echo
                 echo "================================"
-                echo "       ĐÃ GỠ ZALO THÀNH CÔNG    "
+                echo "    ĐÃ GỠ ỨNG DỤNG THÀNH CÔNG   "
                 echo "================================"
                 echo
                 break
                 ;;
             2)
                 echo
-                echo "Đã hủy lệnh. Không thay đổi Zalo hiện tại."
+                echo "Đã hủy lệnh. Không thay đổi ứng dụng hiện tại."
                 unset PASSWORD
                 exit 0
                 ;;
@@ -106,12 +122,12 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
     done
 
     echo
-    echo "Máy bạn đã gỡ Zalo thành công."
+    echo "Máy bạn đã gỡ ứng dụng cũ thành công."
     echo "Bạn có muốn cài phiên bản mới không?"
     echo
     echo "Nếu cài phiên bản mới, cần nhập thêm mật khẩu cài đặt, chọn 1 nếu cài tiếp bản mới"
     echo
-    echo "  1. Tiếp tục cài bản mới Zalo"
+    echo "  1. Tiếp tục cài bản mới Fzalo"
     echo "  2. Thoát và không cài gì tiếp"
     echo
 
@@ -127,7 +143,7 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
                 ;;
             2)
                 echo
-                echo "Đã thoát. Zalo cũ đã được gỡ và không cài bản mới."
+                echo "Đã thoát. Ứng dụng cũ đã được gỡ và không cài bản mới."
                 unset PASSWORD
                 exit 0
                 ;;
