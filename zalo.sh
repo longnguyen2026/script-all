@@ -5,7 +5,7 @@ set -e
 WORKER_URL="https://private-script-sentosa.cloud07622.workers.dev"
 
 echo "============================================================="
-echo "    CÀI ĐẶT ZALO PC VER 26.11.10 - Mật khẩu mới sentosa-9    "
+echo "    CÀI ĐẶT ZALO PC VER 2.2.6 - Mật khẩu P...2026            "
 echo "============================================================="
 echo
 
@@ -111,7 +111,7 @@ if [ "$ZALO_INSTALLED" -eq 1 ]; then
     echo
     echo "Nếu cài phiên bản mới, cần nhập thêm mật khẩu cài đặt, chọn 1 nếu cài tiếp bản mới"
     echo
-    echo "  1. Tiếp tục cài bản mới"
+    echo "  1. Tiếp tục cài bản mới Zalo"
     echo "  2. Thoát và không cài gì tiếp"
     echo
 
