@@ -136,9 +136,9 @@ while true; do
             exit 0
             ;;
         *)
-            echo -e "\n${RED}[!] Lựa chọn không hợp lệ! Vui lòng chọn từ 1 đến 10.${NC}"
+            echo -e "\n${RED}[!] Lựa chọn không hợp lệ! Vui chọn từ 1 đến 10.${NC}"
             ;;
-    end
+    esac
     
     echo -e "\n${CYAN}💡 Các file log thực thi được lưu tại thư mục: ${BOLD}$LOG_DIR/${NC}"
     read -p "Nhấn [Enter] để quay lại menu chính..."
