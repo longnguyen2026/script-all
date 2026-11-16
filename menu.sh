@@ -1,145 +1,122 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# LONG PRO 2.0 - Public launcher for the private Kubuntu menu
 
-# --- CẤU HÌNH MÀU SẮC ANSI ---
-NC='\033[0m'          # No Color
-RED='\033[1;31m'
-GREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-CYAN='\033[1;36m'
-MAGENTA='\033[1;35m'
-BLUE='\033[1;34m'
-BOLD='\033[1;1m'
+set -Eeuo pipefail
 
-# Lưu log vào /tmp để tránh lỗi Permission denied dù chạy ở thư mục nào hay dưới quyền root/user
-LOG_DIR="/tmp/kubuntu-install-logs"
-mkdir -p "$LOG_DIR"
-chmod 777 "$LOG_DIR" 2>/dev/null || true
+WORKER_URL="https://protect-menu.cloud07622.workers.dev/script"
+PASSWORD_HINT="@1234567890"
 
-while true; do
-    clear
-    echo -e "${CYAN}╔══════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║${NC}${MAGENTA}       QUẢN LÝ CÀI ĐẶT HỆ THỐNG KUBUNTU (LONG - PRO)         ${NC}${CYAN}║${NC}"
-    echo -e "${CYAN}╚══════════════════════════════════════════════════════════════╝${NC}"
-    echo -e "${BOLD}Môi trường:${NC} $(lsb_release -ds 2>/dev/null || cat /etc/os-release | grep PRETTY_NAME | cut -d'"' -f2)"
-    echo -e "${BOLD}Hệ thống Log:${NC} ${CYAN}$LOG_DIR${NC}\n"
-    
-    echo -e "${YELLOW}Vui lòng chọn công cụ hoặc phần mềm cần cài đặt:${NC}"
-    echo -e "${CYAN}──────────────────────────────────────────────────────────────${NC}"
-    echo -e "  ${GREEN}[1]${NC} ⌨️  Cài đặt bộ gõ tiếng Việt VDKey (build)"
-    echo -e "  ${GREEN}[2]${NC} 💬  Cài đặt hoặc gỡ bỏ Zalo Linux (Ver 26.11.10)"
-    echo -e "  ${GREEN}[3]${NC} 🖨️  Cài đặt và cấu hình máy in (USB/LAN)"
-    echo -e "  ${GREEN}[4]${NC} 🪟  Cài đặt Winboat"
-    echo -e "  ${GREEN}[5]${NC} 📄  Cài đặt LibreOffice mới"
-    echo -e "  ${GREEN}[6]${NC} 🖥️  Cài đặt FViewer (build UltraViewer)"
-    echo -e "  ${GREEN}[7]${NC} ☁️  Cài đặt Google Drive"
-    echo -e "  ${GREEN}[8]${NC} 📑  Cài đặt WPS Office mới"
-    echo -e "  ${GREEN}[9]${NC} 🛠️  Sửa lỗi mất định dạng Office khi tải lên Google Drive"
-    echo -e "  ${RED}[10]${NC}  🚪  Thoát chương trình"
-    echo -e "${CYAN}──────────────────────────────────────────────────────────────${NC}"
-    
-    read -p "👉 Nhập lựa chọn của bạn [1-10]: " choice
+NC=$'\033[0m'
+BOLD=$'\033[1m'
+BLUE=$'\033[38;5;39m'
+CYAN=$'\033[38;5;51m'
+WHITE=$'\033[97m'
+GREEN=$'\033[38;5;82m'
+YELLOW=$'\033[38;5;220m'
+RED=$'\033[38;5;203m'
+DIM=$'\033[2m'
 
-    # Tạo tên file log dựa theo thời gian thực để tránh ghi đè
-    TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+if [[ ! -t 0 || ! -t 1 ]]; then
+    echo "LONG PRO cần được chạy trực tiếp trong Terminal."
+    echo "bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/run.sh)"
+    exit 1
+fi
 
-    case $choice in
-        1)
-            LOG_FILE="$LOG_DIR/vdkey_$TIMESTAMP.log"
-            echo -e "\n${CYAN}--------------------------------------------------${NC}"
-            echo -e "${MAGENTA}➔ Đang cài đặt bộ gõ tiếng Việt VDKey...${NC}"
-            echo -e "${BOLD}Log chi tiết:${NC} $LOG_FILE"
-            echo -e "${CYAN}--------------------------------------------------${NC}"
-            
-            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/gotiengviet/main/vdkey.sh) 2>&1 | tee "$LOG_FILE"
-            ;;
-        2)
-            LOG_FILE="$LOG_DIR/zalo_$TIMESTAMP.log"
-            echo -e "\n${CYAN}--------------------------------------------------${NC}"
-            echo -e "${MAGENTA}➔ Đang cài đặt/gỡ bỏ Zalo Linux...${NC}"
-            echo -e "${BOLD}Log chi tiết:${NC} $LOG_FILE"
-            echo -e "${CYAN}--------------------------------------------------${NC}"
-            
-            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/zola.sh) 2>&1 | tee "$LOG_FILE"
-            ;;
-        3)
-            LOG_FILE="$LOG_DIR/printer_$TIMESTAMP.log"
-            echo -e "\n${CYAN}--------------------------------------------------${NC}"
-            echo -e "${MAGENTA}➔ Đang cấu hình và cài đặt máy in...${NC}"
-            echo -e "${BOLD}Log chi tiết:${NC} $LOG_FILE"
-            echo -e "${CYAN}--------------------------------------------------${NC}"
-            
-            sudo -v
-            curl -fsSL https://raw.githubusercontent.com/longnguyen2026/printer/main/in.sh | sudo bash 2>&1 | tee "$LOG_FILE"
-            ;;
-        4)
-            LOG_FILE="$LOG_DIR/winboat_$TIMESTAMP.log"
-            echo -e "\n${CYAN}--------------------------------------------------${NC}"
-            echo -e "${MAGENTA}➔ Đang cài đặt Winboat...${NC}"
-            echo -e "${BOLD}Log chi tiết:${NC} $LOG_FILE"
-            echo -e "${CYAN}--------------------------------------------------${NC}"
-            
-            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/winboat/main/install-wb-v4.sh) 2>&1 | tee "$LOG_FILE"
-            ;;
-        5)
-            LOG_FILE="$LOG_DIR/libreoffice_$TIMESTAMP.log"
-            echo -e "\n${CYAN}--------------------------------------------------${NC}"
-            echo -e "${MAGENTA}➔ Đang cài đặt LibreOffice mới...${NC}"
-            echo -e "${BOLD}Log chi tiết:${NC} $LOG_FILE"
-            echo -e "${CYAN}--------------------------------------------------${NC}"
-            
-            sudo -v
-            TMP_SCRIPT="/tmp/libreoffice_install.sh"
-            curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/libreoffice.sh -o "$TMP_SCRIPT"
-            sudo bash "$TMP_SCRIPT" 2>&1 | tee "$LOG_FILE"
-            rm -f "$TMP_SCRIPT"
-            ;;
-        6)
-            LOG_FILE="$LOG_DIR/fviewer_$TIMESTAMP.log"
-            echo -e "\n${CYAN}--------------------------------------------------${NC}"
-            echo -e "${MAGENTA}➔ Đang cài đặt FViewer...${NC}"
-            echo -e "${BOLD}Log chi tiết:${NC} $LOG_FILE"
-            echo -e "${CYAN}--------------------------------------------------${NC}"
-            
-            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/fviewer/main/fviewer.sh) 2>&1 | tee "$LOG_FILE"
-            ;;
-        7)
-            LOG_FILE="$LOG_DIR/drive_$TIMESTAMP.log"
-            echo -e "\n${CYAN}--------------------------------------------------${NC}"
-            echo -e "${MAGENTA}➔ Đang cài đặt Google Drive...${NC}"
-            echo -e "${BOLD}Log chi tiết:${NC} $LOG_FILE"
-            echo -e "${CYAN}--------------------------------------------------${NC}"
-            
-            bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/drive-gg/main/install.sh) 2>&1 | tee "$LOG_FILE"
-            ;;
-        8)
-            LOG_FILE="$LOG_DIR/wps_$TIMESTAMP.log"
-            echo -e "\n${CYAN}--------------------------------------------------${NC}"
-            echo -e "${MAGENTA}➔ Đang cài đặt WPS Office mới...${NC}"
-            echo -e "${BOLD}Log chi tiết:${NC} $LOG_FILE"
-            echo -e "${CYAN}--------------------------------------------------${NC}"
-            
-            sudo -v
-            curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/wps.sh | sudo bash 2>&1 | tee "$LOG_FILE"
-            ;;
-        9)
-            LOG_FILE="$LOG_DIR/fix_upload_drive_$TIMESTAMP.log"
-            echo -e "\n${CYAN}--------------------------------------------------${NC}"
-            echo -e "${MAGENTA}➔ Đang sửa lỗi định dạng tệp tải lên Google Drive...${NC}"
-            echo -e "${BOLD}Log chi tiết:${NC} $LOG_FILE"
-            echo -e "${CYAN}--------------------------------------------------${NC}"
-            
-            sudo -v
-            curl -fsSL https://raw.githubusercontent.com/longnguyen2026/office/main/fix-upload-drive.sh | sudo bash 2>&1 | tee "$LOG_FILE"
-            ;;
-        10)
-            echo -e "\n${GREEN}✨ Thoát chương trình. Hẹn gặp lại anh Long! ✨${NC}\n"
-            exit 0
-            ;;
-        *)
-            echo -e "\n${RED}[!] Lựa chọn không hợp lệ! Vui chọn từ 1 đến 10.${NC}"
-            ;;
-    esac
-    
-    echo -e "\n${CYAN}💡 Các file log thực thi được lưu tại thư mục: ${BOLD}$LOG_DIR/${NC}"
-    read -p "Nhấn [Enter] để quay lại menu chính..."
+for cmd in curl python3; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        echo "Lỗi: Thiếu chương trình $cmd."
+        exit 1
+    fi
 done
+
+TMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/long-pro.XXXXXX")"
+MENU_FILE="$TMP_DIR/menu.sh"
+RESPONSE_FILE="$TMP_DIR/response.txt"
+
+cleanup() {
+    unset PASSWORD 2>/dev/null || true
+    rm -rf "$TMP_DIR"
+}
+trap cleanup EXIT
+
+show_header() {
+    clear 2>/dev/null || true
+    printf '%s' "$BLUE"
+    cat <<'BANNER'
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║  ██╗      ██████╗ ███╗   ██╗ ██████╗     ██████╗ ██████╗             ║
+║  ██║     ██╔═══██╗████╗  ██║██╔════╝     ╚════██╗╚════██╗            ║
+║  ██║     ██║   ██║██╔██╗ ██║██║  ███╗     █████╔╝ █████╔╝            ║
+║  ██║     ██║   ██║██║╚██╗██║██║   ██║    ██╔═══╝  ╚═══██╗            ║
+║  ███████╗╚██████╔╝██║ ╚████║╚██████╔╝    ███████╗██████╔╝            ║
+║  ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝     ╚══════╝╚═════╝             ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+BANNER
+    printf '%s' "$NC"
+    printf '%s%s%s\n' "$BOLD$WHITE" "          KUBUNTU MANAGEMENT SYSTEM  |  VERSION 2.0" "$NC"
+    printf '%s\n' "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    printf '  %sHệ thống:%s LONG PRO       %sBảo vệ:%s %sCloudflare Secure Access%s\n' \
+        "$DIM" "$NC" "$DIM" "$NC" "$GREEN" "$NC"
+    printf '%s\n\n' "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+}
+
+show_header
+printf '  %s%sTRUNG TÂM TRUY CẬP LONG PRO%s\n\n' "$BOLD" "$WHITE" "$NC"
+printf '  %sGợi ý mật khẩu:%s %s%s%s\n' "$DIM" "$NC" "$YELLOW" "$PASSWORD_HINT" "$NC"
+printf '  %sMật khẩu được xác thực bởi Cloudflare.%s\n\n' "$DIM" "$NC"
+
+read -r -s -p "  ${BLUE}➜ Nhập mật khẩu truy cập: ${NC}" PASSWORD
+printf '\n\n'
+
+if [[ -z "$PASSWORD" ]]; then
+    printf '  %s✖ Bạn chưa nhập mật khẩu.%s\n' "$RED" "$NC"
+    exit 1
+fi
+
+printf '  %s⟳ Đang kết nối Cloudflare và xác thực...%s\n' "$CYAN" "$NC"
+
+HTTP_CODE="$(
+    printf '%s' "$PASSWORD" |
+    python3 -c 'import json,sys; print(json.dumps({"password":sys.stdin.read()}))' |
+    curl -sS -o "$RESPONSE_FILE" -w '%{http_code}' \
+        -X POST -H 'Content-Type: application/json' \
+        --data-binary @- "$WORKER_URL"
+)" || {
+    printf '  %s✖ Không thể kết nối Cloudflare. Kiểm tra Internet.%s\n' "$RED" "$NC"
+    exit 1
+}
+unset PASSWORD
+
+case "$HTTP_CODE" in
+    200)
+        if [[ ! -s "$RESPONSE_FILE" ]]; then
+            printf '  %s✖ Cloudflare trả về nội dung rỗng.%s\n' "$RED" "$NC"
+            exit 1
+        fi
+        mv "$RESPONSE_FILE" "$MENU_FILE"
+        ;;
+    400)
+        printf '  %s✖ Yêu cầu không hợp lệ.%s\n' "$RED" "$NC"
+        exit 1
+        ;;
+    401)
+        printf '  %s✖ Mật khẩu không đúng. Truy cập bị từ chối.%s\n' "$RED" "$NC"
+        exit 1
+        ;;
+    *)
+        printf '  %s✖ Lỗi HTTP %s từ Cloudflare/GitHub.%s\n' "$RED" "$HTTP_CODE" "$NC"
+        if [[ -s "$RESPONSE_FILE" ]]; then
+            printf '  %sChi tiết: %s%s\n' "$DIM" "$(head -c 300 "$RESPONSE_FILE")" "$NC"
+        fi
+        exit 1
+        ;;
+esac
+
+printf '  %s✔ Xác thực thành công.%s\n' "$GREEN" "$NC"
+printf '  %s✔ Đã nhận menu từ GitHub Private.%s\n\n' "$GREEN" "$NC"
+sleep 1
+
+# Dùng /dev/tty làm stdin để các lệnh read trong menu.sh vẫn tương tác bình thường.
+bash "$MENU_FILE" </dev/tty
