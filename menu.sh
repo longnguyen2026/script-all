@@ -18,7 +18,7 @@ DIM=$'\033[2m'
 
 if [[ ! -t 0 || ! -t 1 ]]; then
     echo "LONG PRO cần được chạy trực tiếp trong Terminal."
-    echo "bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/run.sh)"
+    echo "bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/menu.sh)"
     exit 1
 fi
 
@@ -57,7 +57,7 @@ BANNER
     printf '%s' "$NC"
     printf '%s%s%s\n' "$BOLD$WHITE" "          KUBUNTU MANAGEMENT SYSTEM  |  VERSION 2.0" "$NC"
     printf '%s\n' "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    printf '  %sHệ thống:%s LONG PRO       %sBảo vệ:%s %sCloudflare Secure Access%s\n' \
+    printf '  %sHệ thống:%s LONG PRO       %sBảo vệ:%s %sSecure Access%s\n' \
         "$DIM" "$NC" "$DIM" "$NC" "$GREEN" "$NC"
     printf '%s\n\n' "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 }
@@ -65,7 +65,7 @@ BANNER
 show_header
 printf '  %s%sTRUNG TÂM TRUY CẬP LONG PRO%s\n\n' "$BOLD" "$WHITE" "$NC"
 printf '  %sGợi ý mật khẩu:%s %s%s%s\n' "$DIM" "$NC" "$YELLOW" "$PASSWORD_HINT" "$NC"
-printf '  %sMật khẩu được xác thực bởi Cloudflare.%s\n\n' "$DIM" "$NC"
+printf '  %sMật khẩu được xác thực.%s\n\n' "$DIM" "$NC"
 
 read -r -s -p "  ${BLUE}➜ Nhập mật khẩu truy cập: ${NC}" PASSWORD
 printf '\n\n'
