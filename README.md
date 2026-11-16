@@ -2,10 +2,7 @@
 ````bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/menu.sh)
 ````
-Hoặc
-````bash
-bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/tools.sh)
-````
+
 ## Lệnh dọn dẹp rác hệ thống Kubuntu
 ````bah
 curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/clear.sh | sudo bash
