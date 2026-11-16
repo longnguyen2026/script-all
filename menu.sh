@@ -34,7 +34,7 @@ while true; do
     echo -e "  ${GREEN}[7]${NC} ☁️  Cài đặt Google Drive"
     echo -e "  ${GREEN}[8]${NC} 📑  Cài đặt WPS Office mới"
     echo -e "  ${GREEN}[9]${NC} 🛠️  Sửa lỗi mất định dạng Office khi tải lên Google Drive"
-    echo -e "  ${RED}[10]${NC} 🚪 Thoát chương trình"
+    echo -e "  ${RED}[10]${NC}  🚪  Thoát chương trình"
     echo -e "${CYAN}──────────────────────────────────────────────────────────────${NC}"
     
     read -p "👉 Nhập lựa chọn của bạn [1-10]: " choice
