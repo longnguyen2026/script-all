@@ -57,7 +57,7 @@ BANNER
     printf '%s' "$NC"
     printf '%s%s%s\n' "$BOLD$WHITE" "          KUBUNTU MANAGEMENT SYSTEM  |  VERSION 2.0" "$NC"
     printf '%s\n' "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    printf '  %sHệ thống:%s LONG PRO       %sBảo vệ:%s %sSecure Access%s\n' \
+    printf '  %sHệ thống:%s LONG PRO       %sBảo vệ:%s %sCloud Secure Access%s\n' \
         "$DIM" "$NC" "$DIM" "$NC" "$GREEN" "$NC"
     printf '%s\n\n' "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 }
@@ -65,7 +65,7 @@ BANNER
 show_header
 printf '  %s%sTRUNG TÂM TRUY CẬP LONG PRO%s\n\n' "$BOLD" "$WHITE" "$NC"
 printf '  %sGợi ý mật khẩu:%s %s%s%s\n' "$DIM" "$NC" "$YELLOW" "$PASSWORD_HINT" "$NC"
-printf '  %sMật khẩu được xác thực.%s\n\n' "$DIM" "$NC"
+printf '  %sMật khẩu được xác thực Cloud.%s\n\n' "$DIM" "$NC"
 
 read -r -s -p "  ${BLUE}➜ Nhập mật khẩu truy cập: ${NC}" PASSWORD
 printf '\n\n'
@@ -75,7 +75,7 @@ if [[ -z "$PASSWORD" ]]; then
     exit 1
 fi
 
-printf '  %s⟳ Đang kết nối Cloudflare và xác thực...%s\n' "$CYAN" "$NC"
+printf '  %s⟳ Đang kết nối Cloud và xác thực...%s\n' "$CYAN" "$NC"
 
 HTTP_CODE="$(
     printf '%s' "$PASSWORD" |
@@ -84,7 +84,7 @@ HTTP_CODE="$(
         -X POST -H 'Content-Type: application/json' \
         --data-binary @- "$WORKER_URL"
 )" || {
-    printf '  %s✖ Không thể kết nối Cloudflare. Kiểm tra Internet.%s\n' "$RED" "$NC"
+    printf '  %s✖ Không thể kết nối Cloud. Kiểm tra Internet.%s\n' "$RED" "$NC"
     exit 1
 }
 unset PASSWORD
@@ -92,7 +92,7 @@ unset PASSWORD
 case "$HTTP_CODE" in
     200)
         if [[ ! -s "$RESPONSE_FILE" ]]; then
-            printf '  %s✖ Cloudflare trả về nội dung rỗng.%s\n' "$RED" "$NC"
+            printf '  %s✖ Cloud trả về nội dung rỗng.%s\n' "$RED" "$NC"
             exit 1
         fi
         mv "$RESPONSE_FILE" "$MENU_FILE"
@@ -106,7 +106,7 @@ case "$HTTP_CODE" in
         exit 1
         ;;
     *)
-        printf '  %s✖ Lỗi HTTP %s từ Cloudflare/GitHub.%s\n' "$RED" "$HTTP_CODE" "$NC"
+        printf '  %s✖ Lỗi HTTP %s từ Cloud/GitHub.%s\n' "$RED" "$HTTP_CODE" "$NC"
         if [[ -s "$RESPONSE_FILE" ]]; then
             printf '  %sChi tiết: %s%s\n' "$DIM" "$(head -c 300 "$RESPONSE_FILE")" "$NC"
         fi
