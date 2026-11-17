@@ -17,7 +17,7 @@ RED=$'\033[38;5;203m'
 DIM=$'\033[2m'
 
 if [[ ! -t 0 || ! -t 1 ]]; then
-    echo "LONG PRO cần được chạy trực tiếp trong Terminal."
+    echo "CÔNG CỤ HỖ TRỢ cần được chạy trực tiếp trong Terminal."
     echo "bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/menu.sh)"
     exit 1
 fi
@@ -57,13 +57,13 @@ BANNER
     printf '%s' "$NC"
     printf '%s%s%s\n' "$BOLD$WHITE" "          KUBUNTU MANAGEMENT SYSTEM  |  VERSION 2.0" "$NC"
     printf '%s\n' "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    printf '  %sHệ thống:%s LONG PRO       %sBảo vệ:%s %sCloud Secure Access%s\n' \
+    printf '  %sHệ thống:%s CÔNG CỤ HỖ TRỢ       %sBảo vệ:%s %sCloud Secure Access%s\n' \
         "$DIM" "$NC" "$DIM" "$NC" "$GREEN" "$NC"
     printf '%s\n\n' "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 }
 
 show_header
-printf '  %s%sTRUNG TÂM TRUY CẬP PRO%s\n\n' "$BOLD" "$WHITE" "$NC"
+printf '  %s%sTRUNG TÂM TRUY CẬP CÔNG CỤ HỖ TRỢ%s\n\n' "$BOLD" "$WHITE" "$NC"
 printf '  %sGợi ý mật khẩu:%s %s%s%s\n' "$DIM" "$NC" "$YELLOW" "$PASSWORD_HINT" "$NC"
 printf '  %sMật khẩu được xác thực Cloud.%s\n\n' "$DIM" "$NC"
 
