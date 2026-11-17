@@ -63,7 +63,7 @@ BANNER
 }
 
 show_header
-printf '  %s%sTRUNG TÂM TRUY CẬP LONG PRO%s\n\n' "$BOLD" "$WHITE" "$NC"
+printf '  %s%sTRUNG TÂM TRUY CẬP PRO%s\n\n' "$BOLD" "$WHITE" "$NC"
 printf '  %sGợi ý mật khẩu:%s %s%s%s\n' "$DIM" "$NC" "$YELLOW" "$PASSWORD_HINT" "$NC"
 printf '  %sMật khẩu được xác thực Cloud.%s\n\n' "$DIM" "$NC"
 
