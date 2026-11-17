@@ -2,6 +2,10 @@
 ````bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/menu.sh)
 ````
+## Lệnh cài Font-VNI
+````bash
+curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/install-vni.sh | sudo bash
+````
 
 ## Lệnh dọn dẹp rác hệ thống Kubuntu
 ````bah
