@@ -67,7 +67,7 @@ printf '  %s%sTRUNG TÂM TRUY CẬP CÔNG CỤ HỖ TRỢ%s\n\n' "$BOLD" "$WHITE
 printf '  %sGợi ý mật khẩu:%s %s%s%s\n' "$DIM" "$NC" "$YELLOW" "$PASSWORD_HINT" "$NC"
 printf '  %sMật khẩu được xác thực Cloud.%s\n\n' "$DIM" "$NC"
 
-read -r -s -p "  ${BLUE}➜ Nhập mật khẩu truy cập: ${NC}" PASSWORD
+read -r -s -p "  ${BLUE}➜ Nhập mật khẩu truy cập (gợi ý phía trên): ${NC}" PASSWORD
 printf '\n\n'
 
 if [[ -z "$PASSWORD" ]]; then
