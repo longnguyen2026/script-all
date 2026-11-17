@@ -7,6 +7,11 @@ bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/ma
 curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/install-vni.sh | sudo bash
 ````
 
+## Lệnh cài tăng ram ảo và chống tràn ram
+````bash
+curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/swap-ram.sh | sudo bash
+````
+
 ## Lệnh dọn dẹp rác hệ thống Kubuntu
 ````bah
 curl -fsSL https://raw.githubusercontent.com/longnguyen2026/script-all/main/clear.sh | sudo bash
